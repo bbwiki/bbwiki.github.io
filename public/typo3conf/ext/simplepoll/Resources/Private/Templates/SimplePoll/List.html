@@ -1,0 +1,57 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+    <div class="simplePollWrap">
+        <div class="simplePollMain simplePoll-{simplePoll.uid}">
+            <f:if condition="{simplePoll.image}">
+                <div class="simplePollImage">
+                    <f:image src='{simplePoll.image.originalResource.publicUrl}' treatIdAsReference='0' />
+                </div>
+            </f:if>
+
+            <h3>{simplePoll.question}</h3>
+
+            <f:form action="vote" id="simplePollForm" name="simplePoll" controller="SimplePoll" method="post" arguments="{simplePoll: simplePoll}"
+                    additionalAttributes="{data-ajax-url: '{f:uri.action(action: \'vote\', controller: \'SimplePoll\', arguments: {simplePoll: simplePoll}, pageType: 1121)}'}">
+                <ul>
+                    <f:for each="{answers}" as="answer">
+                        <div class='simplePollRow'>
+                            <li>
+                                <f:form.radio value="{answer.uid}" id="simplePollRadio-{answer.uid}" name="simplePollRadio" class="simplePollRadioClass" />
+                                <label for="simplePollRadio-{answer.uid}" class="simplePollRadioText">{answer.title}</label>
+                            </li>
+                        </div>
+                    </f:for>
+                </ul>
+
+                <input id="simplePollVote" type="submit" value="{f:translate(id:'tx_simplepoll.voteButton')}" />
+
+                <f:if condition="{settings.useTyposcriptSettings}">
+                    <f:then>
+                        <f:if condition='{settings.showResultLink}'>
+                            <f:link.action id="simplePollSeeVotes" action="seeVotes" controller="SimplePoll" arguments="{simplePoll: simplePoll}"
+                                           additionalAttributes="{data-ajax-url: '{f:uri.action(action: \'seeVotes\', controller: \'SimplePoll\', arguments: {simplePoll: simplePoll}, pageType: 1121)}'}">
+                                {f:translate(id:'tx_simplepoll.showResultsLink')}
+                            </f:link.action>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <f:if condition='{simplePoll.showResultLink}'>
+                            <f:link.action id="simplePollSeeVotes" action="seeVotes" controller="SimplePoll" arguments="{simplePoll: simplePoll}"
+                                           additionalAttributes="{data-ajax-url: '{f:uri.action(action: \'seeVotes\', controller: \'SimplePoll\', arguments: {simplePoll: simplePoll}, pageType: 1121)}'}">
+                                {f:translate(id:'tx_simplepoll.showResultsLink')}
+                            </f:link.action>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </f:form>
+
+            <div class='clearfix'></div>
+        </div>
+    </div>
+
+</f:section>
+
+</html>
