@@ -104,7 +104,7 @@ final class Versions
   'typo3fluid/fluid' => '2.6.0@e3533d0b80e4020cf0de7a546efaae25866f898b',
   'zendframework/zend-code' => '3.3.1@c21db169075c6ec4b342149f446e7b7b724f95eb',
   'zendframework/zend-eventmanager' => '3.2.1@a5e2583a211f73604691586b8406ff7296a946dd',
-  'typo3/cms-base-distribution' => 'No version set (parsed as 1.0.0)@',
+  'typo3/cms-base-distribution' => 'dev-master@92f3fc88d618d869cf979cd8b28893a22effdad0',
 );
 
     private function __construct()
